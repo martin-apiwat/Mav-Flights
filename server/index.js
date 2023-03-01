@@ -1,6 +1,8 @@
 import express from "express";
 const app = express();
 import mongoose from "mongoose";
+import cors from "cors";
+app.use(cors({ origin: "*" }));
 
 const flightsSchema = new mongoose.Schema({
   airline: {
@@ -38,7 +40,12 @@ async function main() {
   );
 
   const flights = await Flight.find();
-  console.log(flights);
+
+  app.get("/", (req, res) => {
+    res.send(flights);
+  });
 }
 
 main();
+
+app.listen(3000);
