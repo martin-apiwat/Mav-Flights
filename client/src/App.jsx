@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import FlightCard from "./FlightCard";
+import FlightCard from "./components/FlightCard";
 
 export default function App() {
   const [flights, setFlights] = useState(null);
@@ -17,6 +17,10 @@ export default function App() {
 
   return (
     <div className="App">
+      <FlightCard
+        isTitle={true}
+        flight={{ airline: "Airline", airport: "Airport" }}
+      />
       {flights
         ? flights.map((flight) => (
             <FlightCard key={flight._id} flight={flight} />
