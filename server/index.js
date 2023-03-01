@@ -1,8 +1,15 @@
 import express from "express";
-const app = express();
 import mongoose from "mongoose";
 import cors from "cors";
+
+const app = express();
+
 app.use(cors({ origin: "*" }));
+
+// Server delay
+app.use((req, res, next) => {
+  setTimeout(next, 500);
+});
 
 const flightsSchema = new mongoose.Schema({
   airline: {
