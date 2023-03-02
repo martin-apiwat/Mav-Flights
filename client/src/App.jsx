@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import FlightCard from "./components/FlightCard";
+import FlightRow from "./components/FlightRow";
 
 export default function App() {
   const [flights, setFlights] = useState(null);
 
   async function getFligths() {
-    const response = await fetch("http://localhost:3000/");
+    const response = await fetch("http://localhost:3000/flights");
     const data = await response.json();
     console.log(data);
     setFlights(data);
@@ -17,15 +17,21 @@ export default function App() {
 
   return (
     <div className="App">
-      <FlightCard
-        isTitle={true}
-        flight={{ airline: "Airline", airport: "Airport" }}
-      />
-      {flights
-        ? flights.map((flight) => (
-            <FlightCard key={flight._id} flight={flight} />
-          ))
-        : "Loading..."}
+      <table className="flights-table">
+        <tr className="flights-table-row flights-table-head">
+          <td>Airline</td>
+          <td>Airline</td>
+          <td>Airline</td>
+          <td>Airline</td>
+          <td>Airline</td>
+          <td>Airline</td>
+        </tr>
+        {flights
+          ? flights.map((flight) => (
+              <FlightRow key={flight._id} flight={flight} />
+            ))
+          : "Loading..."}
+      </table>
     </div>
   );
 }

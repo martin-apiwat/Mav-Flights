@@ -1,9 +1,0 @@
-.flight-cards-title {
-  display: flex;
-  font-size: 30px;
-}
-
-.flights-cards {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-}

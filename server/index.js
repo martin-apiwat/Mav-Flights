@@ -46,9 +46,8 @@ async function main() {
     "mongodb+srv://MartinApiwat:Martin123@cluster0.rigswq4.mongodb.net/?retryWrites=true&w=majority"
   );
 
-  const flights = await Flight.find();
-
-  app.get("/", (req, res) => {
+  app.get("/flights", async (req, res) => {
+    const flights = await Flight.find();
     res.send(flights);
   });
 }
