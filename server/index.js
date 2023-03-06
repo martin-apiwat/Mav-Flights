@@ -6,11 +6,6 @@ const app = express();
 
 app.use(cors({ origin: "*" }));
 
-// Server delay
-app.use((req, res, next) => {
-  setTimeout(next, 500);
-});
-
 const flightsSchema = new mongoose.Schema({
   airline: {
     type: String,
@@ -47,7 +42,11 @@ async function main() {
   );
 
   app.get("/flights", async (req, res) => {
-    const flights = await Flight.find();
+    const flights = await Flight.find(
+      req.query.search
+        ? { destination: { $regex: req.query.search, $options: "i" } }
+        : {}
+    );
     res.send(flights);
   });
 }
